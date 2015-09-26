@@ -3,7 +3,7 @@
 
     mod.controller('qlearndd', ['$scope', ($scope) => {
 
-        $scope.text = "Hello my Name is Hannes!";
+        $scope.text = "Bei der Gerechtigkeit Gottes! Wer an diesem Tage seine Lippen öffnet und den Namen seines Herrn erwähnt, auf den werden die Scharen göttlicher Eingebung aus dem Himmel Meines Namens, der Allwissende, der Allweise, herabkommen. Zu ihm wird auch die Versammlung der Höhe herabsteigen, und jeder aus ihr wird einen Kelch reinen Lichtes vorantragen. So wurde es vorherbestimmt im Reiche der Offenbarung Gottes, auf Befehl des Allherrlichen, des Machtvollsten.";
         $scope.solution = $scope.text.split(' ');
         $scope.words = _.shuffle($scope.solution);
 
