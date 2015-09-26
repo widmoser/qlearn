@@ -1,6 +1,8 @@
 <div ng-controller="qlearndd">
     <div class="words">
-        <div class="word" ng-repeat="w in words" ng-drag="true" ng-drag-data="w" ng-drag-success="onDragComplete($data,$event)">{{ w }}</div>
+        <div class="word" ng-repeat="w in words" ng-drag="true" ng-drag-data="w" ng-drag-success="onDragComplete($index)">{{ w }}</div>
     </div>
-    <board></board>
+    <div class="board" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
+        <div class="word" ng-repeat="w in orderedWords" ng-drag="true" ng-drag-data="w">{{ w }}</div>
+    </div>
 </div>
