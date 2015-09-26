@@ -5,33 +5,39 @@
 }
 
 .board {
-  height: 400px;
   border: solid 1px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .solved {
   background: #00ff00;
 }
 
-.word {
+.inline {
   display: inline-block;
+}
+
+.word {
   border: solid 1px #bbb;
   border-radius: 3px;
   background: #efefef;
   cursor: pointer;
-  width: 100px;
   overflow: hidden;
-  padding-bottom: 5px;
-  padding-top: 5px;
   text-align: center;
+  padding: 3px 5px;
+  margin: 3px;
 }
 
 .slot {
-  display: inline-block;
   border: solid 1px;
   border-radius: 3px;
-  width: 100px;
-  height: 40px;
+  height: 36px;
+  padding: 0;
+}
+
+.slot-container {
+  margin-bottom: 5px;
 }
 
 .indicator {

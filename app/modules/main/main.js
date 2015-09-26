@@ -27,9 +27,7 @@
             }
 
             $scope.slots[index] = data;
-            if (_.isEqual($scope.solution, $scope.slots)) {
-                $scope.solved = true;
-            }
+            $scope.solved = _.isEqual($scope.solution, $scope.slots);
         };
 
         $scope.onDragMove = (data, index) => {
