@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
-var run = require('gulp-run');
 var traceur = require('gulp-traceur');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
@@ -20,8 +19,8 @@ var gulpNgConfig = require('gulp-ng-config');
 
 gulp.task('default', function(cb) {
     runSequence(
-        'develop:cleanAll',
-        'develop:serve',
+        'cleanAll',
+        'serve',
         cb
     );
 });
@@ -38,14 +37,14 @@ gulp.task('serve', ['build'], function() {
         }
     });
 
-    gulp.watch('app/modules/**/*.js', ['develop:compile']);
-    gulp.watch('app/modules/**/*.tpl.html', ['develop:templateCache']);
-    gulp.watch('app/modules/**/*.less', ['develop:compileLess']);
-    gulp.watch('app/**/*.html', ['develop:copyHtml']);
-    gulp.watch('app/index.html', ['develop:index']);
+    gulp.watch('app/modules/**/*.js', ['compile']);
+    gulp.watch('app/modules/**/*.tpl.html', ['templateCache']);
+    gulp.watch('app/modules/**/*.less', ['compileLess']);
+    gulp.watch('app/**/*.html', ['copyHtml']);
+    gulp.watch('app/index.html', ['index']);
 });
 
-gulp.task('develop:cleanAll', function(cb) {
+gulp.task('cleanAll', function(cb) {
     del([
         'develop'
     ], cb);
@@ -58,7 +57,7 @@ gulp.task('index', ['compile'], function() {
     var jsSources = gulp.src(['develop/modules/**/*.js']).pipe(angularFilesort());
 
     return target
-        .pipe(inject(gulp.src(bowerFiles({ paths: 'app' }, {read: false})), {name: 'bower', relative: true }))
+        .pipe(inject(gulp.src(bowerFiles({read: false})), {name: 'bower', relative: true }))
         .pipe(inject(es.merge(jsSources, cssSources), { addRootSlash: false, ignorePath: 'develop' })).pipe(gulp.dest('develop'));
 });
 
@@ -73,7 +72,7 @@ gulp.task('build', ['index', 'templateCache', 'compileLess', 'copyOther']);
 
 gulp.task('jsHint', function() {
     return gulp.src('app/modules/**/*.js')
-        .pipe(cache('develop:jsHint'))
+        .pipe(cache('jsHint'))
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -116,7 +115,7 @@ gulp.task('copyFonts', function() {
         .pipe(gulp.dest('develop/fonts'));
 });
 
-gulp.task('compileLess', ['develop:lessHint'], function () {
+gulp.task('compileLess', ['lessHint'], function () {
     return gulp.src('app/modules/styles.less')
         .pipe(less()).on('error', errHandler)
         .pipe(gulp.dest('develop'))
@@ -125,12 +124,12 @@ gulp.task('compileLess', ['develop:lessHint'], function () {
 
 gulp.task('lessHint', function() {
     return gulp.src('app/modules/**/*.less')
-        .pipe(cache('develop:lessHint'))
+        .pipe(cache('lessHint'))
         .pipe(recess()).on('error', errHandler)
         .pipe(recess.reporter()).on('error', errHandler);
 });
 
-gulp.task('test', ['develop:build'], function() {
+gulp.task('test', ['build'], function() {
     // Be sure to return the stream
     // NOTE: Using the fake './foobar' so as to run the files
     // listed in karma.conf.js INSTEAD of what was passed to

@@ -2,7 +2,6 @@
     "name": "qlearn",
     "version": "0.0.1",
     "description": "qlearn",
-    //"main": "main.js",
     "author": "hw",
     "devDependencies": {
         "browser-sync": "^2.6.4",

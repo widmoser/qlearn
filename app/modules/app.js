@@ -1,13 +1,15 @@
 (() => {
     var app = angular.module('qlearn', [
-        'ngRoute'
+        'ngRoute',
+        'ngDraggable',
+        'mgcrea.ngStrap'
     ]);
 
     app.config(['$routeProvider', ($routeProvider) => {
         $routeProvider
             .when('/', {
                 controller: 'MainController',
-                templateUrl: 'app/modules/main.html'
+                templateUrl: 'app/modules/main/main.html'
             })
             .otherwise({
                 redirectTo: '/404'
