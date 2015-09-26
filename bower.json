@@ -18,7 +18,8 @@
     "angular-route": "1.4.4",
     "ngDraggable": "~0.1.8",
     "angular-strap": "~2.3.3",
-    "bootstrap-less": "~3.3.4"
+    "bootstrap-less": "~3.3.4",
+    "lodash": "~3.10.1"
   },
   "resolutions": {
     "angular": "1.4.4"

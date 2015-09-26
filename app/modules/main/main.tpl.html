@@ -2,10 +2,9 @@
     <div class="words">
         <div class="word" ng-repeat="w in words" ng-drag="true" ng-drag-data="w" ng-drag-success="onDragComplete($index)">{{ w }}</div>
     </div>
-    <div class="board" ng-drop="true" ng-drop-success="onDropComplete($data,$event)" ng-drag-move="onDragMove($data, $event)">
-        <div class="inline" ng-repeat="w in orderedWords" ng-drag="true" ng-drag-data="w.text" ng-drag-success="onDragCompleteOrdered($index)" measured="w">
-            <span ng-if="insertBefore === $index">X</span>
-            <span class="word">{{ w.text }}</span>
+    <div class="board" ng-class="{ 'solved' : solved }">
+        <div class="slot" ng-repeat="w in slots track by $index" ng-drop="true" ng-drop-success="onDropComplete($data, $index)">
+            <div class="word" ng-show="w != null" ng-drag="true" ng-drag-data="w" ng-drag-success="onDragCompleteFromSlot($index)">{{ w }}</div>
         </div>
     </div>
 </div>

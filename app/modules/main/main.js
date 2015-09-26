@@ -3,12 +3,11 @@
 
     mod.controller('qlearndd', ['$scope', ($scope) => {
 
-        $scope.offset = {
-            x: -18,
-            y: -4
-        };
+        $scope.text = "Hello my Name is Hannes!";
+        $scope.solution = $scope.text.split(' ');
+        $scope.words = _.shuffle($scope.solution);
 
-        $scope.words = [ 'Hello', 'Name', 'Hannes!', 'my', 'is' ];
+        $scope.slots = Array($scope.words.length).fill(null);
 
         $scope.orderedWords = [];
 
@@ -16,46 +15,33 @@
             $scope.words.splice(index, 1);
         };
 
-        $scope.onDragCompleteOrdered = (index) => {
-            $scope.orderedWords.splice(index, 1);
+        $scope.onDragCompleteFromSlot = (index) => {
+            $scope.slots[index] = null;
         };
 
-        $scope.onDropComplete = (data, event) => {
-            console.log(data, event);
+        $scope.onDropComplete = (data, index) => {
+            console.log(data, index);
 
-            // search for the correct index
+            if ($scope.slots[index] != null) {
+                $scope.words.push($scope.slots[index]);
+            }
 
-            var obj = {
-                text: data,
-                //x: event.tx,
-                //y: event.ty,
-                cx: event.element.centerX,
-                cy: event.element.centerY,
-                width: event.element.centerX * 2,
-                height: event.element.centerY * 2
-            };
-            $scope.orderedWords.push(obj);
-            console.log(obj.x, obj.y);
-
-            $scope.insertBefore = undefined;
+            $scope.slots[index] = data;
+            if (_.isEqual($scope.solution, $scope.slots)) {
+                $scope.solved = true;
+            }
         };
 
-        $scope.onDragMove = (data, event) => {
+        $scope.onDragMove = (data, index) => {
             //console.log($scope.orderedWords, data, event);
 
-            var i = $scope.orderedWords.findIndex((w) => {
-                var x = w.metrics.client.x + $scope.offset.x;
-                var y = w.metrics.client.y + $scope.offset.y;
-                if (event.tx > x && event.tx < x + w.width && event.ty > y && event.ty < y + w.height) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
+            if (index !== undefined) {
+                $scope.insertBefore = index;
+            } else {
+                $scope.insertBefore = $scope.orderedWords.length;
+            }
 
-            $scope.insertBefore = i;
-
-            console.log(event.tx, event.ty, $scope.insertBefore);
+            console.log(index);
         };
 
 
