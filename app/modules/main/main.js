@@ -1,7 +1,9 @@
 (() => {
     var mod = angular.module('qlearn.dd', []);
 
-    mod.controller('qlearn.dd', ['$scope', ($scope) => {
+    mod.controller('qlearndd', ['$scope', ($scope) => {
+
+        $scope.words = [ 'hello' ];
 
     }]);
 

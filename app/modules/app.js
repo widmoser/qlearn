@@ -4,13 +4,14 @@
         'ngDraggable',
         'mgcrea.ngStrap',
 
-        'qlearn.templates.gen'
+        'qlearn.templates.gen',
+        'qlearn.dd'
     ]);
 
     app.config(['$routeProvider', ($routeProvider) => {
         $routeProvider
             .when('/', {
-                controller: 'qlearn.dd',
+                controller: 'qlearndd',
                 templateUrl: 'app/modules/main/main.tpl.html'
             })
             .otherwise({
