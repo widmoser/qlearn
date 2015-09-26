@@ -81,7 +81,7 @@ gulp.task('templateCache', function () {
     gulp.src('app/modules/**/*.tpl.html')
         .pipe(templateCache('templates.gen.js', {
             root : 'app/modules',
-            module: 'kv.app.templates.gen',
+            module: 'qlearn.templates.gen',
             standalone: true,
             templateHeader : '(() => { angular.module("<%= module %>"<%= standalone %>).run(["$templateCache", function($templateCache) {',
             templateFooter : '}]); })();'
