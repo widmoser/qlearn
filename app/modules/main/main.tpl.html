@@ -3,6 +3,6 @@
         <div class="word" ng-repeat="w in words" ng-drag="true" ng-drag-data="w" ng-drag-success="onDragComplete($index)">{{ w }}</div>
     </div>
     <div class="board" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
-        <div class="word" ng-repeat="w in orderedWords" ng-drag="true" ng-drag-data="w">{{ w }}</div>
+        <div class="word" ng-repeat="w in orderedWords" ng-drag="true" ng-drag-data="w.text" ng-drag-success="onDragCompleteOrdered($index)">{{ w.text }}</div>
     </div>
 </div>
